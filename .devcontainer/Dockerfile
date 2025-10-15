@@ -1,6 +1,8 @@
 # Start from the latest official Alpine Linux image
 FROM alpine:latest
 
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+
 # Install necessary dependencies
 RUN apk update && apk add --no-cache \
     ca-certificates \
@@ -14,12 +16,12 @@ RUN apk update && apk add --no-cache \
 
 # Install OpenJDK 21 (LTS) and the latest Node.js + npm
 RUN apk add --no-cache \
-    openjdk21-jdk \
+    openjdk25-jdk \
     nodejs \
     npm
 
 # Set JAVA_HOME environment variable for Java 21
-ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+ENV JAVA_HOME=/usr/lib/jvm/java-25-openjdk
 ENV PATH="$JAVA_HOME/bin:${PATH}"
 
 # Verify installations (optional)
